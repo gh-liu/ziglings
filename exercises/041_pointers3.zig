@@ -2,17 +2,18 @@
 // The tricky part is that the pointer's mutability (var vs const) refers
 // to the ability to change what the pointer POINTS TO, not the ability
 // to change the VALUE at that location!
+// 指针可变性：修改的是指针，而不是指针指向的值
 //
 //     const locked: u8 = 5;
 //     var unlocked: u8 = 10;
 //
 //     const p1: *const u8 = &locked;
-//     var   p2: *const u8 = &locked;
+//     var   p2: *const u8 = &locked; 可以改变指针的值，指向其他东西；
 //
 // Both p1 and p2 point to constant values which cannot change. However,
 // p2 can be changed to point to something else and p1 cannot!
 //
-//     const p3: *u8 = &unlocked;
+//     const p3: *u8 = &unlocked; 不能改变指针的值；
 //     var   p4: *u8 = &unlocked;
 //     const p5: *const u8 = &unlocked;
 //     var   p6: *const u8 = &unlocked;
@@ -31,7 +32,7 @@ pub fn main() void {
 
     // Please define pointer "p" so that it can point to EITHER foo or
     // bar AND change the value it points to!
-    ??? p: ??? = undefined;
+    var p: *u8 = undefined;
 
     p = &foo;
     p.* += 1;

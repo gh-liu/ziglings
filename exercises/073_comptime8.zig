@@ -37,7 +37,7 @@ pub fn main() void {
     print("My llama value is {}.\n", .{my_llama});
 }
 
-fn getLlama(i: usize) u32 {
+fn getLlama(comptime i: usize) u32 {
     // We've put a guard assert() at the top of this function to
     // prevent mistakes. The 'comptime' keyword here means that
     // the mistake will be caught when we compile!
@@ -52,13 +52,13 @@ fn getLlama(i: usize) u32 {
     // parameter above to make this so?
     comptime assert(i < llama_count);
 
-    return llamas[i];
+    return llamas[i - 1];
 }
 
 // Fun fact: this assert() function is identical to
 // std.debug.assert() from the Zig Standard Library.
 fn assert(ok: bool) void {
-    if (!ok) unreachable;
+    if (ok) unreachable;
 }
 //
 // Bonus fun fact: I accidentally replaced all instances of 'foo'
